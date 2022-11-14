@@ -4,6 +4,7 @@ public class Player {
     private int number;
     private String name;
     private int money;
+    private int value;
     public void setPlayer(int num, int mon){
         number = num;
         money = mon;
@@ -23,6 +24,9 @@ public class Player {
     public boolean correctGuess;
     public void setGuess(boolean x){
         correctGuess = x;
+    }
+    public int getValue(){
+        return value;
     }
     public void guess(Board x, String phrase){
         System.out.println("Guess A Letter " + getName());
@@ -46,6 +50,7 @@ public class Player {
                 }
             }
             if(phrase.contains(guess)){
+                money+=(phrase.length()-phrase.replace(guess,"").length())*getValue();
                 for(int i = 0; i<phrase.length();i++){
                     if(phrase.substring(i,i+1).equals(guess)){
                         String temp = x.blanks.substring(0,i) + guess + x.blanks.substring(i+1,x.blanks.length());
@@ -61,5 +66,9 @@ public class Player {
                 x.setGame(false);
                 correctGuess=false;
             }
+    }
+    public void spin(Wheel x){
+        value = x.getValue((int)(Math.random()*14));
+        System.out.println("You spun and landed on $" + value + ".");
     }
 }
