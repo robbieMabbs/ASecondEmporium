@@ -12,6 +12,8 @@ public class Player {
         name = sc.nextLine();
         System.out.println("Hello " + name + ". You have $" + money);
     }
+
+    //Getters
     public String getName(){
         return name;
     }
@@ -21,13 +23,18 @@ public class Player {
     public int getNumber(){
         return number;
     }
+    public int getValue(){
+        return value;
+    }
+
+    //
     public boolean correctGuess;
     public void setGuess(boolean x){
         correctGuess = x;
     }
-    public int getValue(){
-        return value;
-    }
+
+
+    //Prompts player to guess and then compares guess to previous guesses and makes sure it's one letter
     public void guess(Board x, String phrase){
         System.out.println("Guess A Letter " + getName());
         boolean validGuess = false;
@@ -37,7 +44,7 @@ public class Player {
             guess = sc.nextLine();
             guess = guess.toLowerCase();
                 if(guess.length()>1){
-                    System.out.println("Please Enter a Letter");
+                    System.out.println("Please Enter a LETTER");
                 }
                 else{
                     if(x.previousGuesses.contains(guess)){
@@ -49,6 +56,8 @@ public class Player {
                     }
                 }
             }
+
+            //Correct guess protocol. Replaces blanks that are the correctly guessed letter with that letter for display.
             if(phrase.contains(guess)){
                 money+=(phrase.length()-phrase.replace(guess,"").length())*getValue();
                 for(int i = 0; i<phrase.length();i++){
@@ -59,14 +68,19 @@ public class Player {
                     }
                 }
             }
+            //If wrong insult and reprint phrase
             else{System.out.println("Wrong! bozo...");}
             System.out.println(x.blanks);
+
+            //If there are no blanks left end the game in a win
             if(!x.blanks.contains("_")){
                 System.out.println(getName()+" Won!!!");
                 x.setGame(false);
                 correctGuess=false;
             }
     }
+
+    //spin the wheel!
     public void spin(Wheel x){
         value = x.getValue((int)(Math.random()*14));
         System.out.println("You spun and landed on $" + value + ".");

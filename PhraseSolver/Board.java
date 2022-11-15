@@ -12,7 +12,7 @@ private String loadPhrase()
     try 
     {
       
-      Scanner sc = new Scanner(new File(/*Replace with the path*/"/workspace/ASecondEmporium/PhraseSolver/phrases.txt"));
+      Scanner sc = new Scanner(new File("/workspace/ASecondEmporium/PhraseSolver/phrases.txt"));
       while (sc.hasNextLine())
       {
         tempPhrase = sc.nextLine().trim();
@@ -25,7 +25,7 @@ private String loadPhrase()
     try 
     {
       int count = 0;
-      Scanner sc = new Scanner(new File(/*Replace with the path*/"/workspace/ASecondEmporium/PhraseSolver/phrases.txt"));
+      Scanner sc = new Scanner(new File("/workspace/ASecondEmporium/PhraseSolver/phrases.txt"));
       while (sc.hasNextLine())
       {
         count++;
@@ -59,10 +59,13 @@ private String loadPhrase()
     return blanks;
   }
   public boolean game =true;
+  //sets whether the game is still playing or not
   public void setGame(boolean x){
       game = x;
   }
+  //a list of all the previously guessed letters
   public String previousGuesses = "";
+  //adds the guess to the list of previous guesses
   public void changePrevious(String guess){
     previousGuesses+=guess;
   }
