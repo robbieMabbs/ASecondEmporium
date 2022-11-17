@@ -12,17 +12,17 @@ public class Main {
       player1.setPlayer(1, 100);
       player2.setPlayer(2, 100);
 
-      //TESTING - DELETE
-      System.out.println(phrase);
+      System.out.println();
+      System.out.println(phrase);//TESTING - DELETE
       System.out.println(board.mysteryPhrase(board, phrase));
-      //END TESTING
 
       // Spin wheel, check guess, if true guess again,  break.
       while(board.game==true){
          player1.setGuess(true);
+         System.out.println();
          while(player1.correctGuess == true){
             player1.menu(wheel,board,phrase);
-            if(player1.getMoney()<0){board.setGame(false); System.out.println("Get yo money up, not yo funnny up, hrraughh.\n A man says as he enters from stage right.\n He slowly saunters towards you, droping his man purse on the floor, liquor bottle shattering.\nGetting closer, you feel your pulse accelerate.\n The fear is palpable.\n He grabs you by the arm, and rips it clean off.\n \"That should settle the debt...\" he coos as he slips away leaving you writhing in agony on the floor.\n GAME OVER - YOU WENT BROKE");}
+            if(player1.getMoney()<0){board.setGame(false); System.out.println("\"Get yo money up, not yo funnny up, hrraughh.\"\n A man says as he enters from stage right.\n He slowly saunters towards you, droping his man purse on the floor, liquor bottle shattering.\nGetting closer, you feel your pulse accelerate.\n The fear is palpable.\n He grabs you by the arm, and rips it clean off.\n \"That should settle the debt...\" he coos as he slips away leaving you writhing in agony on the floor.\n GAME OVER - YOU WENT BROKE");}
             System.out.println(player1.getName()+ "'s Balance: $"+player1.getMoney());
             if(board.game==false){
                break;
@@ -30,9 +30,10 @@ public class Main {
          } 
          //Player 2 turn
          if(board.game==true){player2.setGuess(true);}
+         System.out.println();
          while(player2.correctGuess == true){
             player2.menu(wheel,board,phrase);
-            if(player2.getMoney()<0){board.setGame(false); System.out.println("Get yo money up, not yo funnny up, hrraughh.\n A man says as he enters from stage right.\n He slowly saunters towards you, droping his man purse on the floor, liquor bottle shattering.\nGetting closer, you feel your pulse accelerate.\n The fear is palpable.\n He grabs you by the arm, and rips it clean off.\n \"That should settle the debt...\" he coos as he slips away leaving you writhing in agony on the floor.\n GAME OVER - YOU WENT BROKE");}
+            if(player2.getMoney()<0){board.setGame(false); System.out.println("\"Get yo money up, not yo funnny up, hrraughh.\"\n A man says as he enters from stage right.\n He slowly saunters towards you, droping his man purse on the floor, liquor bottle shattering.\nGetting closer, you feel your pulse accelerate.\n The fear is palpable.\n He grabs you by the arm, and rips it clean off.\n \"That should settle the debt...\" he coos as he slips away leaving you writhing in agony on the floor.\n GAME OVER - YOU WENT BROKE");}
             System.out.println(player2.getName()+ "'s Balance: $"+player2.getMoney());
             if(board.game==false){
                break;

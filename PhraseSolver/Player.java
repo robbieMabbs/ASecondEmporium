@@ -10,7 +10,9 @@ public class Player {
         money = mon;
         System.out.println("Player "+ num+ "\nEnter Name:");
         name = sc.nextLine();
+        playerColour();
         System.out.println("Hello " + name + ". You have $" + money);
+        resetText();
     }
 
     //Getters
@@ -30,11 +32,19 @@ public class Player {
     public void setGuess(boolean x){
         correctGuess = x;
     }
-
+    public void playerColour(){
+        if(getNumber()==1){
+            System.out.print("\033[0;32m");//sets green text
+        }
+        else if(getNumber()==2){
+            System.out.print("\033[0;34m");//sets blue text
+        }
+    }
+    public void resetText(){System.out.print("\033[0m"); }//resets text
 
     //Prompts player to guess and then compares guess to previous guesses and makes sure it's one letter
     public void guess(Board x, String phrase){
-        System.out.println("Guess A Consant " + getName());
+        System.out.println("Guess A Consant, " + getName());
         boolean validGuess = false;
         correctGuess = false;
         String guess = "";
@@ -64,10 +74,10 @@ public class Player {
                         correctGuess = true;
                     }
                 }
+                System.out.println(x.blanks);
             }
             //If wrong insult and reprint phrase
             else{System.out.println("Wrong! bozo...");}
-            System.out.println(x.blanks);
             //If there are no blanks left end the game in a win
             if(!x.blanks.contains("_")){
                 System.out.println(getName()+" Won!!!");
@@ -83,8 +93,10 @@ public class Player {
     }
     public void menu(Wheel wheel, Board board, String phrase){
         boolean validGuess = false;
+        playerColour();
         while(validGuess==false){
-            System.out.println("Would " +getName()+ " like to... \n 1- Guess a Consanant?\n 2- Pay for a Vowel? (Costs $250)\n 3- Guess the Word?");
+            System.out.println("Would " +getName()+ " like to... \n [1] Guess a Consanant?\n [2] Pay for a Vowel? (Costs $250)\n [3] Guess the Word?");
+            resetText();
             String input = sc.nextLine();  
             if(input.equals("1")){
                     spin(wheel);
@@ -92,30 +104,47 @@ public class Player {
                     validGuess=true;
                 }
                 else if(input.equals("3")){
+                    System.out.println("Guess the Word: ");
                     String guess = sc.nextLine();
                     guess.toLowerCase();
                     if(guess.equals(phrase)){System.out.println("Hooray! You won!"); board.setGame(false);}
                     else{System.out.println("Better Luck Next Time");}
                     validGuess=true;
+                    correctGuess=false;
                 }
                 else if(input.equals("2")){
-                    String guess = sc.nextLine();
                     money-=250;
-                    if(phrase.contains(guess)){
-                        for(int i = 0; i<phrase.length();i++){
-                            if(phrase.substring(i,i+1).equals(guess)){
-                                String temp = board.blanks.substring(0,i) + guess + board.blanks.substring(i+1,board.blanks.length());
-                                board.setBlanks(temp);
-                                correctGuess = true;
-                            }
+                    validGuess=false;
+                    while (validGuess==false){
+                        System.out.println("Guess a Vowel, " + getName());
+                        String guess = sc.nextLine();
+                        if(guess.length()>1||!(guess.equals("a")||guess.equals("e")||guess.equals("i")||guess.equals("o")||guess.equals("u"))){
+                            System.out.println("Please Enter a VOWEL");
                         }
-                    }
-                    validGuess=true;
+                        else if(board.previousGuesses.contains(guess)){
+                            System.out.println("Please Enter a Letter That Hasn't Been Used");
+                        }
+                        else if(phrase.contains(guess)){
+                            for(int i = 0; i<phrase.length();i++){
+                                if(phrase.substring(i,i+1).equals(guess)){
+                                    String temp = board.blanks.substring(0,i) + guess + board.blanks.substring(i+1,board.blanks.length());
+                                    board.setBlanks(temp);
+                                }
+                                board.changePrevious(guess);
+                            }
+                            correctGuess = true;
+                            System.out.println(board.blanks);
+                            validGuess=true;
+                        }
+                        //If wrong insult and reprint phrase
+                        else{System.out.println("Not in the Word! bozo...");
+                            validGuess=true;
+                            correctGuess=false;
+                            System.out.println(board.blanks);
+                        }
+                        }
+                    }   
                 }
-                //If wrong insult and reprint phrase
-                else{System.out.println("Not in the Word! bozo...");}
-                System.out.println(board.blanks);
-                }
-            }
+        }
     }
 
