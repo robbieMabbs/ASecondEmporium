@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 public class Board{
+
 //gives random phrase
 private String loadPhrase()
   {
@@ -38,6 +39,8 @@ private String loadPhrase()
     } catch (Exception e) { System.out.println("Error reading or parsing phrases.txt"); }
     return tempPhrase;
   }
+
+  //our code below//
   public String getPhrase(){
     return loadPhrase();
   }
@@ -45,6 +48,7 @@ private String loadPhrase()
   public void setBlanks(String t){
     blanks = t;
   }
+  //creates the mystery phrase, from the original phrase
   public String mysteryPhrase(Board x, String phrase){
     blanks = "";
     for(int i= 0; i< phrase.length();i++){

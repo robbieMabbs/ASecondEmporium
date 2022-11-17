@@ -11,12 +11,10 @@ public class Main {
       //initialize players and their money
       player1.setPlayer(1, 100);
       player2.setPlayer(2, 100);
+      
+      board.mysteryPhrase(board, phrase);
 
-      System.out.println();
-      System.out.println(phrase);//TESTING - DELETE
-      System.out.println(board.mysteryPhrase(board, phrase));
-
-      // Spin wheel, check guess, if true guess again,  break.
+      // Spin wheel, check guess, if true guess again, break, if the player goes negative they get beaten up...
       while(board.game==true){
          player1.setGuess(true);
          System.out.println();
