@@ -158,5 +158,8 @@ public class Player {
             else{System.out.println("Please Enter a Valid Choice");}   
         }
     }
+    public String getScore() {
+        return null;
+    }
 }
 
