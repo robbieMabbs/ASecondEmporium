@@ -11,7 +11,7 @@ public class Game {
     //Sets up the game with a random amount of pieces between 10 and 50
     //Sets up the players so they can be accessed
     public Game(Player p1, Player p2){
-        pieces = (int)(Math.random()*40+10);//To Do: Grab a random value between 10 and 50
+        pieces = (int)(Math.random()*41)+10;//To Do: Grab a random value between 10 and 50
         this.p1 = p1;
         this.p2 = p2;
     }
